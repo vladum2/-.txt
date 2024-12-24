@@ -1,0 +1,24 @@
+# Завантаження необхідних бібліотек
+library(ggplot2)
+# Генерація випадкових даних
+set.seed(123)
+data <- data.frame(
+  Category = rep(c("A", "B", "C"), each = 10),
+  Value = rnorm(30, mean = 50, sd = 10)
+)
+# Резюме даних
+summary_data <- aggregate(Value ~ Category, data, mean)
+print("Середні значення для кожної категорії:")
+print(summary_data)
+# Візуалізація даних
+ggplot(data, aes(x = Category, y = Value, fill = Category)) +
+  geom_boxplot() +
+  labs(
+    title = "Розподіл значень по категоріях",
+    x = "Категорія",
+    y = "Значення"
+  ) +
+  theme_minimal()
+# Збереження графіка
+ggsave("boxplot.png", width = 6, height = 4)
+# Уманський, Мірошник, Вовк, Кінах, Матюх
